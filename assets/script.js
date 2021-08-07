@@ -6,7 +6,6 @@ var logos = [
     "rice_logo.gif",
     "richmond_logo.jpg"
 ];
-
 var answers = [
     ["Baylor", "California","Belmont","Chicago"],
     ["Auburn", "Clemson","LSU","Detroit"],
@@ -22,9 +21,7 @@ var image = 0;
 var list = document.getElementById("answer-list");
 var main = document.querySelector("main");
 var reply = document.getElementById("reply");
-
 var question = document.createElement("p");
-question.textContent = "Which college or university does the following logo represent?"
 var item1 = document.createElement("li");
 var item2 = document.createElement("li");
 var item3 = document.createElement("li");
@@ -34,6 +31,8 @@ var answer2 = document.createElement("button");
 var answer3 = document.createElement("button");
 var answer4 = document.createElement("button");
 
+
+// Functions for the EventListeners.
 function newLabels() {
     if (image < logos.length){
         logoEL.src="./assets/" + logos[image];
@@ -47,16 +46,20 @@ function newLabels() {
 function correct() {
     reply.textContent = "You are correct, well done!";
     correctAnswers++;
+    localStorage.setItem("correctAnswers", correctAnswers);
 }
 
 function incorrect() {
     reply.textContent = "That is WRONG";
+    localStorage.setItem("correctAnswers", correctAnswers);
 }
 
-
-// When a new game is started we're going to want to setup the first question and input the timer.
+// Even Listeners for each of the buttons.
 newGame.addEventListener("click", function(event){
+    question.textContent = "Which college or university does the following logo represent?"
     image=0;
+    correctAnswers=0;
+    localStorage.setItem("correctAnswers", correctAnswers);
     logoEL.src="./assets/" + logos[image];
     main.appendChild(question);
     answer1.textContent=answers[0][0];
@@ -78,7 +81,6 @@ answer1.addEventListener("click", function(event) {
     else {
         incorrect();
     }
-
     newLabels();
 })
 
@@ -89,7 +91,6 @@ answer2.addEventListener("click", function(event) {
     else {
         incorrect();
     }
-
     newLabels();
 })
 
@@ -100,7 +101,6 @@ answer3.addEventListener("click", function(event) {
     else {
         incorrect();
     }
-
     newLabels();
 })
 
@@ -111,6 +111,5 @@ answer4.addEventListener("click", function(event) {
     else {
         incorrect();
     }
-
     newLabels();
 })
