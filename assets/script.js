@@ -15,15 +15,16 @@ var answers = [
     ["Temple", "Houston","Louisville","Rice"],
     ["TCU", "Richmond","Oregon State","UC-Irvine"]
 ];
-
+var correctAnswers = 0;
 var logoEL = document.querySelector("img");
 var newGame = document.getElementById("new-game");
 var image = 0;
 var list = document.getElementById("answer-list");
 var main = document.querySelector("main");
+var reply = document.getElementById("reply");
 
 var question = document.createElement("p");
-question.textContent = "Which college or university does the following image represent?"
+question.textContent = "Which college or university does the following logo represent?"
 var item1 = document.createElement("li");
 var item2 = document.createElement("li");
 var item3 = document.createElement("li");
@@ -32,36 +33,84 @@ var answer1 = document.createElement("button");
 var answer2 = document.createElement("button");
 var answer3 = document.createElement("button");
 var answer4 = document.createElement("button");
-answer1.textContent=answers[0][0];
-answer2.textContent=answers[0][1];
-answer3.textContent=answers[0][2];
-answer4.textContent=answers[0][3];
 
+function newLabels() {
+    if (image < logos.length){
+        logoEL.src="./assets/" + logos[image];
+        answer1.textContent=answers[image][0];
+        answer2.textContent=answers[image][1];
+        answer3.textContent=answers[image][2];
+        answer4.textContent=answers[image][3];
+        image++;
+}}
+
+function correct() {
+    reply.textContent = "You are correct, well done!";
+    correctAnswers++;
+}
+
+function incorrect() {
+    reply.textContent = "That is WRONG";
+}
 
 
 // When a new game is started we're going to want to setup the first question and input the timer.
 newGame.addEventListener("click", function(event){
-
+    image=0;
+    logoEL.src="./assets/" + logos[image];
     main.appendChild(question);
-
+    answer1.textContent=answers[0][0];
+    answer2.textContent=answers[0][1];
+    answer3.textContent=answers[0][2];
+    answer4.textContent=answers[0][3];
+    reply.textContent = "";
     list.appendChild(item1).appendChild(answer1);
     list.appendChild(item2).appendChild(answer2);
     list.appendChild(item3).appendChild(answer3);
     list.appendChild(item4).appendChild(answer4);
-
-
-    if (image < logos.length){
-    logoEL.src="./assets/" + logos[image];
     image++;
-    }
-
 })
 
+answer1.addEventListener("click", function(event) {
+    if (image === 3 || image === 4) {
+        correct();
+    }
+    else {
+        incorrect();
+    }
 
+    newLabels();
+})
 
+answer2.addEventListener("click", function(event) {
+    if (image === 2 || image === 6) {
+        correct();
+    }
+    else {
+        incorrect();
+    }
 
-// TO BE USED LATER
-// if (image < logos.length){
-//     logoEL.src="./assets/" + logos[image];
-//     image++;
-//     }
+    newLabels();
+})
+
+answer3.addEventListener("click", function(event) {
+    if (image === 1) {
+        correct();
+    }
+    else {
+        incorrect();
+    }
+
+    newLabels();
+})
+
+answer4.addEventListener("click", function(event) {
+    if (image === 5) {
+        correct();
+    }
+    else {
+        incorrect();
+    }
+
+    newLabels();
+})
