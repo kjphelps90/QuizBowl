@@ -28,6 +28,12 @@ main {
     width: 35%;
     margin: 2% auto;
     height: fit-content;
+    text-align: center;
+}
+
+main p {
+    font-size: 24px;
+    font-weight: bold;
 }
 
 img {
@@ -38,4 +44,25 @@ img {
 li {
     display: inline;
     list-style-type: none;
+}
+
+ul {
+    padding:0;
+}
+
+section {
+    border: 1px solid black;
+    width: 50%;
+    margin: 2% auto;
+    display: flex;
+    flex-direction: wrap;
+    justify-content: space-evenly;
+}
+
+section button {
+    margin: 0 10px;
+}
+
+section button:hover {
+    background-color: rgb(114, 20, 114);
 }

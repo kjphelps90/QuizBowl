@@ -1,19 +1,3 @@
-var logoEL = document.querySelector("img");
-var newGame = document.getElementById("new-game");
-var image = 0;
-var list = document.getElementById("answer-list");
-
-var question = document.createElement("p");
-question.textContent = "Which college or university does the following image represent?"
-var item1 = document.createElement("li");
-var item2 = document.createElement("li");
-var item3 = document.createElement("li");
-var item4 = document.createElement("li");
-var answer1 = document.createElement("button");
-var answer2 = document.createElement("button");
-var answer3 = document.createElement("button");
-var answer4 = document.createElement("button");
-
 var logos = [
     "belmont_logo.png",
     "clemson_logo.png",
@@ -32,10 +16,33 @@ var answers = [
     ["TCU", "Richmond","Oregon State","UC-Irvine"]
 ];
 
+var logoEL = document.querySelector("img");
+var newGame = document.getElementById("new-game");
+var image = 0;
+var list = document.getElementById("answer-list");
+var main = document.querySelector("main");
+
+var question = document.createElement("p");
+question.textContent = "Which college or university does the following image represent?"
+var item1 = document.createElement("li");
+var item2 = document.createElement("li");
+var item3 = document.createElement("li");
+var item4 = document.createElement("li");
+var answer1 = document.createElement("button");
+var answer2 = document.createElement("button");
+var answer3 = document.createElement("button");
+var answer4 = document.createElement("button");
+answer1.textContent=answers[0][0];
+answer2.textContent=answers[0][1];
+answer3.textContent=answers[0][2];
+answer4.textContent=answers[0][3];
+
+
+
 // When a new game is started we're going to want to setup the first question and input the timer.
 newGame.addEventListener("click", function(event){
 
-    logoEL.insertBefore(question);
+    main.appendChild(question);
 
     list.appendChild(item1).appendChild(answer1);
     list.appendChild(item2).appendChild(answer2);
