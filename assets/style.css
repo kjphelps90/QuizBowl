@@ -34,3 +34,8 @@ img {
     display: block;
     margin: auto;
 }
+
+li {
+    display: inline;
+    list-style-type: none;
+}
