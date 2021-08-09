@@ -35,6 +35,7 @@ var image = 0;
 // Grabbing items from the HTML page.
 var logoEL = document.querySelector("img");
 var newGame = document.getElementById("new-game");
+var btnHighScore = document.getElementById("high-score");
 var list = document.getElementById("answer-list");
 var main = document.querySelector("main");
 var reply = document.getElementById("reply");
@@ -65,9 +66,7 @@ for (let i=0; i < scoresList.length; i++) {
     var currentScore = scoresList[i].score;
     ranking.textContent= currentName + " - " + currentScore;
     console.log(ranking);
-}
-}
-
+}}
 
 function postScores() {
     var name = initialsInput.value;
@@ -82,15 +81,13 @@ function postScores() {
     highScores = storedScores;
     highScores.push(submitScores);    
     }
-
-    
     localStorage.setItem("High Score", JSON.stringify(highScores));
 }
 
 //image starts a 0, when the page loads. This function sets the first question when the 'New Game' button is hit. The else statement is for when we've run out of images, the prompt to enter intials for high score comes up.
 function newLabels() {
     if (image < logos.length){
-        logoEL.src="./assets/" + logos[image];
+        logoEL.src="./assets/images/" + logos[image];
         answer1.textContent=answers[image][0];
         answer2.textContent=answers[image][1];
         answer3.textContent=answers[image][2];
@@ -127,7 +124,7 @@ newGame.addEventListener("click", function(event){
     image=0;
     correctAnswers=0;
     localStorage.setItem("correctAnswers", correctAnswers);
-    logoEL.src="./assets/" + logos[image];
+    logoEL.src="./assets/images/" + logos[image];
     main.appendChild(question);
     answer1.textContent=answers[0][0];
     answer2.textContent=answers[0][1];
@@ -169,7 +166,11 @@ answer4.addEventListener("click", function(event) {
 // This EventListener is setup to try and setup a HighScores page.
 submit.addEventListener("click", function(event){
     postScores();
-    toHighScorePage();
+    window.location.replace("file:///C:/Users/Phelps/Desktop/homework/QuizBowl/highscore.html");
 
+})
+
+btnHighScore.addEventListener("click", function() {
+    window.location.replace("file:///C:/Users/Phelps/Desktop/homework/QuizBowl/highscore.html");
 })
 

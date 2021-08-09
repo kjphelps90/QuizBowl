@@ -9,8 +9,6 @@ function init() {
     scoresList.sort(function(a,b){
         return b.score - a.score;
     });
-    console.log(scoresList);
-    console.log(scoresList[1].score);
     
     if (scoresList.length < 10){
     for (let i=0; i < scoresList.length; i++) {

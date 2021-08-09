@@ -1,12 +1,22 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body {
+    background-color: #57B8FF;
+}
+
 header {
-    border: 1px solid black;
+    border: 10px solid white;
     width: 75%;
     margin: 2% auto;
     text-align: center;
+    color: black;
+    font-size: 28px;
+    background-color: #fbb13c;
+    border-radius: 20px;
 }
 
 .buttons-container {
-    border: 1px solid black;
     width: 25%;
     margin: 2% auto;
     height: fit-content;
@@ -24,7 +34,6 @@ header {
 }
 
 main {
-    border: 1px solid black;
     width: 35%;
     margin: 2% auto;
     height: fit-content;
@@ -51,7 +60,6 @@ ul {
 }
 
 section {
-    border: 1px solid black;
     width: 50%;
     margin: 2% auto;
     display: flex;
@@ -68,7 +76,6 @@ section button:hover, section button:active {
     background-color: rgb(114, 20, 114);
 }
 
-ol {
-    display: block;
-    list-style: georgian;
+form button {
+    margin-top: 10px;
 }
