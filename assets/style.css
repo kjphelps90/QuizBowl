@@ -67,3 +67,8 @@ section button {
 section button:hover, section button:active {
     background-color: rgb(114, 20, 114);
 }
+
+ol {
+    display: block;
+    list-style: georgian;
+}

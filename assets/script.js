@@ -39,7 +39,7 @@ var list = document.getElementById("answer-list");
 var main = document.querySelector("main");
 var reply = document.getElementById("reply");
 var question = document.createElement("p");
-var highScoreList = document.getElementById("high-score-list"); // this is on the highscore.html page
+
 
 // Trying to create items to setup the form input.
 var form = document.createElement("form");
@@ -56,8 +56,8 @@ var scoresList = JSON.parse(localStorage.getItem("High Score"));
 scoresList.sort(function(a,b){
     return b.score - a.score;
 });
-console.log(scoresList);
-console.log(scoresList[1].score);
+// console.log(scoresList);
+// console.log(scoresList[1].score);
 
 for (let i=0; i < scoresList.length; i++) {
     var ranking = document.createElement("li");
@@ -65,11 +65,7 @@ for (let i=0; i < scoresList.length; i++) {
     var currentScore = scoresList[i].score;
     ranking.textContent= currentName + " - " + currentScore;
     console.log(ranking);
-    // highScoreList.appendChild(ranking);
 }
-
-console.log(highScoreList);
-
 }
 
 
