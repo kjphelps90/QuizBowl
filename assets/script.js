@@ -50,20 +50,43 @@ initialsInput.name = "name";
 var submit = document.createElement("button");
 submit.textContent = "Submit";
 
-// var highScores = []; //this doesn't work beacuse it resets the array each time.
+// function to sort the high scores array and then post them on the highscores page.
+function toHighScorePage() {
+var scoresList = JSON.parse(localStorage.getItem("High Score"));
+scoresList.sort(function(a,b){
+    return b.score - a.score;
+});
+console.log(scoresList);
+console.log(scoresList[1].score);
+
+for (let i=0; i < scoresList.length; i++) {
+    var ranking = document.createElement("li");
+    var currentName = scoresList[i].name;
+    var currentScore = scoresList[i].score;
+    ranking.textContent= currentName + " - " + currentScore;
+    console.log(ranking);
+    // highScoreList.appendChild(ranking);
+}
+
+console.log(highScoreList);
+
+}
+
 
 function postScores() {
     var name = initialsInput.value;
-    var submitScores = [{"name": name,"score": score}];
+    var submitScores = {"name": name,"score": score};
+    var storedScores = JSON.parse(localStorage.getItem("High Score"));
 
-    if (typeof highScores !== "undefined"){
-        highScores = JSON.parse(localStorage.getItem("High Score"));
-        highScores.push(submitScores);
-    }
-    else {
+    if (!storedScores){
         var highScores = [];
         highScores.push(submitScores);
     }
+    else {
+    highScores = storedScores;
+    highScores.push(submitScores);    
+    }
+
     
     localStorage.setItem("High Score", JSON.stringify(highScores));
 }
@@ -85,7 +108,6 @@ function newLabels() {
         question.textContent = "Please enter your initials to see if you made the high score!";
         main.appendChild(form).appendChild(initialsInput)
         main.appendChild(submit);
-        submit.value = "Submit";
         localStorage.setItem("score", score);
     }
 }
@@ -150,24 +172,8 @@ answer4.addEventListener("click", function(event) {
 
 // This EventListener is setup to try and setup a HighScores page.
 submit.addEventListener("click", function(event){
-
-
     postScores();
+    toHighScorePage();
 
-
-    // console.log(name);
-    // console.log(submitScores);
-    // console.log(highScores);
-    
-//     if (highScores !== null){
-//         var highScores = JSON.parse(localStorage.getItem("High Score"));
-//         highScores.push(submitScores);
-//         localStorage.setItem("High Score", JSON.stringify(highScores));
-// }
-//     else {
-//         highScores.push(submitScores);
-//         localStorage.setItem("High Score", JSON.stringify(highScores));  
-//     }
-    
 })
 
