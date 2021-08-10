@@ -30,7 +30,6 @@ var answer4 = document.createElement("button");
 var question = document.createElement("p");
 var timeSlot = document.createElement("h2");
 
-
 // Setting placeholder variable that should be reset whenever the page is reset/re-visited.
 var correctAnswers = 0;
 var score = 60;
@@ -56,6 +55,11 @@ initialsInput.type = "text";
 initialsInput.name = "name";
 var submit = document.createElement("button");
 submit.textContent = "Submit";
+
+// creating timer
+var timeStart = moment("59", "X").format("ss");
+console.log(timeStart);
+
 
 // function to sort the high scores array and then post them on the highscores page.
 function toHighScorePage() {
@@ -89,16 +93,6 @@ function postScores() {
     localStorage.setItem("High Score", JSON.stringify(highScores));
 }
 
-function gameOver() {
-        main.removeChild(logoEL);
-        list.remove();
-        reply.remove();
-        question.textContent = "Please enter your initials to see if you made the high score!";
-        main.appendChild(form).appendChild(initialsInput)
-        main.appendChild(submit);
-        localStorage.setItem("score", score);
-}
-
 //image starts at 0, when the page loads. This function sets the first question when the 'New Game' button is hit. The else statement is for when we've run out of images, the prompt to enter intials for high score comes up.
 function newLabels() {
     if (image < logos.length){
@@ -110,7 +104,13 @@ function newLabels() {
         image++;
     }
     else {
-        gameOver();
+        main.removeChild(logoEL);
+        list.remove();
+        reply.remove();
+        question.textContent = "Please enter your initials to see if you made the high score!";
+        main.appendChild(form).appendChild(initialsInput)
+        main.appendChild(submit);
+        localStorage.setItem("score", score);
     }
 }
 // Function to check if answers are correct. The answers are stored at the end of the 'answers' array. The selection is set in the EventListeners on the bottom to compare.
@@ -127,21 +127,8 @@ function answerCheck() {
     }
 }
 
-setInterval(function startTimer(){
-    var timeRemaining = moment("59").format("ss");
-    if (timeRemaining > 0) {
-        timeRemaining--
-        timeSlot.textContent = "Time remaining: " + timeRemaining;
-    }
-    else {
-        gameOver();
-    }
-}, 1000);
-
-
 // EvenListener for the New Game button. It changes the image to the first one in the array. It also sets up a list with buttons to be used for the game.
 newGame.addEventListener("click", function(event){
-    startTimer();
     question.textContent = "Which college or university does the following logo represent?"
     image=0;
     correctAnswers=0;
