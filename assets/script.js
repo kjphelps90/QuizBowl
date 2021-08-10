@@ -31,7 +31,6 @@ var question = document.createElement("p");
 var timeSlot = document.createElement("h2");
 
 // Setting placeholder variable that should be reset whenever the page is reset/re-visited.
-var correctAnswers = 0;
 var score = 60;
 var selection = -90;
 var image = 0;
@@ -117,22 +116,19 @@ function newLabels() {
 function answerCheck() {
     if (selection === answers[image-1][4]) {
     reply.textContent = "You are correct, well done!";
-    correctAnswers++;
-    localStorage.setItem("correctAnswers", correctAnswers);
     }
     else {
     reply.textContent = "That is WRONG";
-    localStorage.setItem("correctAnswers", correctAnswers);
     score -= 10;
     }
 }
 
 // EvenListener for the New Game button. It changes the image to the first one in the array. It also sets up a list with buttons to be used for the game.
 newGame.addEventListener("click", function(event){
+    heading.appendChild(timeSlot);
+    timeSlot.textContent = "Time Remaining: ";
     question.textContent = "Which college or university does the following logo represent?"
     image=0;
-    correctAnswers=0;
-    localStorage.setItem("correctAnswers", correctAnswers);
     logoEL.src="./assets/images/" + logos[image];
     main.appendChild(question);
     answer1.textContent=answers[0][0];
