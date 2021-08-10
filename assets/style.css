@@ -16,6 +16,10 @@ header {
     border-radius: 20px;
 }
 
+h2 {
+    font-size: 16px;
+}
+
 .buttons-container {
     width: 25%;
     margin: 2% auto;

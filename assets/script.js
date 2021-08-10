@@ -16,6 +16,8 @@ var answers = [
 ];
 
 
+
+
 // Creating elements to add to the page once the New Game has begun.
 var item1 = document.createElement("li");
 var item2 = document.createElement("li");
@@ -25,6 +27,9 @@ var answer1 = document.createElement("button");
 var answer2 = document.createElement("button");
 var answer3 = document.createElement("button");
 var answer4 = document.createElement("button");
+var question = document.createElement("p");
+var timeSlot = document.createElement("h2");
+
 
 // Setting placeholder variable that should be reset whenever the page is reset/re-visited.
 var correctAnswers = 0;
@@ -39,7 +44,8 @@ var btnHighScore = document.getElementById("high-score");
 var list = document.getElementById("answer-list");
 var main = document.querySelector("main");
 var reply = document.getElementById("reply");
-var question = document.createElement("p");
+var heading = document.getElementById("heading");
+
 
 
 // Trying to create items to setup the form input.
@@ -57,8 +63,6 @@ var scoresList = JSON.parse(localStorage.getItem("High Score"));
 scoresList.sort(function(a,b){
     return b.score - a.score;
 });
-// console.log(scoresList);
-// console.log(scoresList[1].score);
 
 for (let i=0; i < scoresList.length; i++) {
     var ranking = document.createElement("li");
@@ -68,6 +72,7 @@ for (let i=0; i < scoresList.length; i++) {
     console.log(ranking);
 }}
 
+// function that post scores to the local storage.
 function postScores() {
     var name = initialsInput.value;
     var submitScores = {"name": name,"score": score};
@@ -84,7 +89,17 @@ function postScores() {
     localStorage.setItem("High Score", JSON.stringify(highScores));
 }
 
-//image starts a 0, when the page loads. This function sets the first question when the 'New Game' button is hit. The else statement is for when we've run out of images, the prompt to enter intials for high score comes up.
+function gameOver() {
+        main.removeChild(logoEL);
+        list.remove();
+        reply.remove();
+        question.textContent = "Please enter your initials to see if you made the high score!";
+        main.appendChild(form).appendChild(initialsInput)
+        main.appendChild(submit);
+        localStorage.setItem("score", score);
+}
+
+//image starts at 0, when the page loads. This function sets the first question when the 'New Game' button is hit. The else statement is for when we've run out of images, the prompt to enter intials for high score comes up.
 function newLabels() {
     if (image < logos.length){
         logoEL.src="./assets/images/" + logos[image];
@@ -95,13 +110,7 @@ function newLabels() {
         image++;
     }
     else {
-        main.removeChild(logoEL);
-        list.remove();
-        reply.remove();
-        question.textContent = "Please enter your initials to see if you made the high score!";
-        main.appendChild(form).appendChild(initialsInput)
-        main.appendChild(submit);
-        localStorage.setItem("score", score);
+        gameOver();
     }
 }
 // Function to check if answers are correct. The answers are stored at the end of the 'answers' array. The selection is set in the EventListeners on the bottom to compare.
@@ -118,8 +127,21 @@ function answerCheck() {
     }
 }
 
+setInterval(function startTimer(){
+    var timeRemaining = moment("59").format("ss");
+    if (timeRemaining > 0) {
+        timeRemaining--
+        timeSlot.textContent = "Time remaining: " + timeRemaining;
+    }
+    else {
+        gameOver();
+    }
+}, 1000);
+
+
 // EvenListener for the New Game button. It changes the image to the first one in the array. It also sets up a list with buttons to be used for the game.
 newGame.addEventListener("click", function(event){
+    startTimer();
     question.textContent = "Which college or university does the following logo represent?"
     image=0;
     correctAnswers=0;
