@@ -76,9 +76,8 @@ function startTimer() {
             newLabels();
         }
         else if (complete == 1) {
-            score = runningTimer+1;
+            score = runningTimer;
             clearInterval(clock);
-            heading.removeChild(timeSlot);
         }
     }, 1000);
 }
@@ -128,7 +127,6 @@ function newLabels() {
     }
     else {
         complete = 1;
-        heading.removeChild(timeSlot);
         main.removeChild(logoEL);
         list.remove();
         reply.remove();
@@ -137,7 +135,6 @@ function newLabels() {
         main.appendChild(submit);
         score = runningTimer;
         localStorage.setItem("score", score);
-     
     }
 }
 // Function to check if answers are correct. The answers are stored at the end of the 'answers' array. The selection is set in the EventListeners on the bottom to compare.
@@ -147,7 +144,7 @@ function answerCheck() {
     }
     else {
     reply.textContent = "That is WRONG";
-    score -= 10;
+    runningTimer -= 10;
     }
 }
 
