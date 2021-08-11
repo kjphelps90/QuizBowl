@@ -1,6 +1,7 @@
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 body {
     background-color: #57B8FF;
 }
@@ -29,7 +30,8 @@ h2 {
     justify-content: space-between;
 }
 
-.buttons-container button, section button {
+.buttons-container button,
+section button {
     height: 50px;
     width: 100px;
     background-color: rgb(22, 22, 150);
@@ -60,7 +62,7 @@ li {
 }
 
 ul {
-    padding:0;
+    padding: 0;
 }
 
 section {
@@ -76,7 +78,8 @@ section button {
     margin: 0 10px;
 }
 
-section button:hover, section button:active {
+section button:hover,
+section button:active {
     background-color: rgb(114, 20, 114);
 }
 
