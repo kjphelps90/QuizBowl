@@ -195,11 +195,11 @@ answer4.addEventListener("click", function(event) {
 // This EventListener is setup to try and setup a HighScores page.
 submit.addEventListener("click", function(event){
     postScores();
-    window.location.replace("file:///C:/Users/Phelps/Desktop/homework/QuizBowl/highscore.html");
+    window.location.replace("https://kjphelps90.github.io/QuizBowl/highscore.html");
 
 })
 
 btnHighScore.addEventListener("click", function() {
-    window.location.replace("file:///C:/Users/Phelps/Desktop/homework/QuizBowl/highscore.html");
+    window.location.replace("https://kjphelps90.github.io/QuizBowl/highscore.html");
 })
 

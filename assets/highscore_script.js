@@ -39,7 +39,7 @@ clearButton.addEventListener("click", function(event) {
 })
 
 backButton.addEventListener("click", function(event) {
-    window.location.replace("file:///C:/Users/Phelps/Desktop/homework/QuizBowl/index.html");
+    window.location.replace("https://kjphelps90.github.io/QuizBowl/");
 })
 
 
