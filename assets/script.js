@@ -34,6 +34,7 @@ var timeSlot = document.createElement("h2");
 var score;
 var selection = -90;
 var image = 0;
+var complete;
 
 // creating start of timer
 var runningTimer = moment("59", "X").format("ss");
@@ -60,7 +61,7 @@ var submit = document.createElement("button");
 submit.textContent = "Submit";
 
 
-// starting the timer after new game is clicked.
+// starting the timer after new game is clicked. Once it reaches 0 the timer goes away.
 
 function startTimer() {
     var clock = setInterval(function(){
@@ -69,15 +70,18 @@ function startTimer() {
         heading.appendChild(timeSlot);
 
         if (runningTimer == 0) {
+            score = 0;
+            clearInterval(clock);
+            heading.removeChild(timeSlot);
+            newLabels();
+        }
+        else if (complete == 1) {
+            score = runningTimer+1;
             clearInterval(clock);
             heading.removeChild(timeSlot);
         }
     }, 1000);
 }
-
-
-
-
 
 
 // function to sort the high scores array and then post them on the highscores page.
@@ -114,7 +118,7 @@ function postScores() {
 
 //image starts at 0, when the page loads. This function sets the first question when the 'New Game' button is hit. The else statement is for when we've run out of images, the prompt to enter intials for high score comes up.
 function newLabels() {
-    if (image < logos.length){
+    if (image < logos.length && runningTimer > 0){
         logoEL.src="./assets/images/" + logos[image];
         answer1.textContent=answers[image][0];
         answer2.textContent=answers[image][1];
@@ -123,13 +127,17 @@ function newLabels() {
         image++;
     }
     else {
+        complete = 1;
+        heading.removeChild(timeSlot);
         main.removeChild(logoEL);
         list.remove();
         reply.remove();
         question.textContent = "Please enter your initials to see if you made the high score!";
         main.appendChild(form).appendChild(initialsInput)
         main.appendChild(submit);
+        score = runningTimer;
         localStorage.setItem("score", score);
+     
     }
 }
 // Function to check if answers are correct. The answers are stored at the end of the 'answers' array. The selection is set in the EventListeners on the bottom to compare.
