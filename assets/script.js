@@ -31,9 +31,13 @@ var question = document.createElement("p");
 var timeSlot = document.createElement("h2");
 
 // Setting placeholder variable that should be reset whenever the page is reset/re-visited.
-var score = 60;
+var score;
 var selection = -90;
 var image = 0;
+
+// creating start of timer
+var runningTimer = moment("59", "X").format("ss");
+console.log(runningTimer);
 
 // Grabbing items from the HTML page.
 var logoEL = document.querySelector("img");
@@ -55,9 +59,25 @@ initialsInput.name = "name";
 var submit = document.createElement("button");
 submit.textContent = "Submit";
 
-// creating timer
-var timeStart = moment("59", "X").format("ss");
-console.log(timeStart);
+
+// starting the timer after new game is clicked.
+
+function startTimer() {
+    var clock = setInterval(function(){
+        runningTimer--;
+        timeSlot.textContent = "Time remaining: " + runningTimer;
+        heading.appendChild(timeSlot);
+
+        if (runningTimer == 0) {
+            clearInterval(clock);
+            heading.removeChild(timeSlot);
+        }
+    }, 1000);
+}
+
+
+
+
 
 
 // function to sort the high scores array and then post them on the highscores page.
@@ -125,8 +145,7 @@ function answerCheck() {
 
 // EvenListener for the New Game button. It changes the image to the first one in the array. It also sets up a list with buttons to be used for the game.
 newGame.addEventListener("click", function(event){
-    heading.appendChild(timeSlot);
-    timeSlot.textContent = "Time Remaining: ";
+    startTimer();
     question.textContent = "Which college or university does the following logo represent?"
     image=0;
     logoEL.src="./assets/images/" + logos[image];
